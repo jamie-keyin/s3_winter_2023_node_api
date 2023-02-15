@@ -16,7 +16,8 @@ restAPP.get('/', (request, response) => {
 })
 
 restAPP.get('/students', pgDBAccessLayer.getStudents)
-
+restAPP.post('/student', pgDBAccessLayer.createStudent)
+restAPP.put('/student/:id', pgDBAccessLayer.updateStudent)
 
 // start the Express server
 restAPP.listen(port, () => {
