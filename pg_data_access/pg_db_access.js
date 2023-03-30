@@ -8,6 +8,11 @@ const pool = new Pool({
 })
 
 const getStudents = (request, response) => {
+// to pull query prams off the URL use something like:
+//    const id = parseInt(request.query.id)
+//    const name = request.query.name
+
+
   pool.query('SELECT * FROM student ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error
