@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const restAPP = express()
 const pgDBAccessLayer = require('./pg_data_access/pg_db_access')
-const mongoWeatherDBAccessLayer = require('./mongo_db_access/mongo_atlas_access_weather')
+const mongoDBAccessLayer = require('./mongo_db_access/mongo_atlas_access')
 const port = 3000
 
 restAPP.use(bodyParser.json())
@@ -23,10 +23,12 @@ restAPP.post('/student', pgDBAccessLayer.createStudent)
 restAPP.put('/student/:id', pgDBAccessLayer.updateStudent)
 restAPP.delete('/student/:id', pgDBAccessLayer.deleteStudent)
 
-restAPP.get('/weather', mongoWeatherDBAccessLayer.getWeatherData)
+restAPP.get('/weather', mongoDBAccessLayer.getWeatherData)
+
+restAPP.get('/mongo_students', mongoDBAccessLayer.getStudentData)
 
 // perform a database connection when the server starts
-mongoWeatherDBAccessLayer.connectToServer(function (err) {
+mongoDBAccessLayer.connectToServer(function (err) {
     if (err) {
       console.error(err);
       process.exit();
